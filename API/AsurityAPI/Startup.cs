@@ -30,7 +30,7 @@ namespace AsurityAPI
             // Setup Database, just in memory for now
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseInMemoryDatabase("TestDatabase");
+                options.UseInMemoryDatabase("InMemoryDatabase");
             });
 
             services.AddControllers();
