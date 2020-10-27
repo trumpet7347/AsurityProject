@@ -24,6 +24,11 @@ namespace AsurityAPI.Controllers
         [HttpGet]
         public ActionResult GetContacts()
         {
+            if (_context.States.Any())
+            {
+                return BadRequest("Data is already in the system");
+            }
+
             _context.States.AddRange(new List<State>
              {
                     new State(){StateId = 1, Name = "Alabama", Abbreviation = "AL"},
