@@ -26,7 +26,7 @@ namespace AsurityAPI.Controllers
         {
             _context.States.AddRange(new List<State>
              {
-                 new State(){StateId = 1, Name = "Alabama", Abbreviation = "AL"},
+                    new State(){StateId = 1, Name = "Alabama", Abbreviation = "AL"},
                     new State(){StateId = 2, Name = "Alaska", Abbreviation = "AK"},
                     new State(){StateId = 3, Name = "Arizona", Abbreviation = "AZ"},
                     new State(){StateId = 4, Name = "Arkansas", Abbreviation = "AR"},
@@ -79,6 +79,22 @@ namespace AsurityAPI.Controllers
                     new State(){StateId = 51, Name = "Wyoming", Abbreviation = "WY"},
              });
 
+            _context.SaveChanges();
+
+            _context.ContactFrequencies.AddRange(new List<ContactFrequency>
+            {
+                new ContactFrequency { ContactFrequencyId = 1, Name = "Only Account Information", Description = "Contact only about account Information" },
+                new ContactFrequency { ContactFrequencyId = 2, Name = "Marketing Information", Description = "Ok to contact with marketing Information" },
+                new ContactFrequency { ContactFrequencyId = 3, Name = "Third Party Marketing Information", Description = "Ok to contact with third-party marketing information" },
+            });
+            _context.SaveChanges();
+
+            _context.ContactMethods.AddRange(new List<ContactMethod>
+            {
+                new ContactMethod {ContactMethodId=1,Description="Text"},
+                new ContactMethod {ContactMethodId=2,Description="Email"},
+                new ContactMethod {ContactMethodId=3,Description="Phone"}
+            });
             _context.SaveChanges();
 
             _context.Contacts.Add(new Contact
