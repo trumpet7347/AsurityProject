@@ -26,6 +26,11 @@ namespace DataAccess
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Contact>().HasOne<State>(c => c.State);
+            modelBuilder.Entity<Contact>().HasOne<ContactFrequency>(c => c.ContactFrequency);
+            modelBuilder.Entity<Contact>().HasOne<ContactMethod>(c => c.ContactMethod);
+
+            base.OnModelCreating(modelBuilder);
         }
 
     }
