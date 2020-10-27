@@ -18,7 +18,9 @@ namespace DataAccess.Models
         [Required]
         public string LastName { get; set; }
 
+        [MaxLength(100)]
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [MaxLength(100)]
@@ -29,17 +31,21 @@ namespace DataAccess.Models
         [Required]
         public string City { get; set; }
 
+        [Required]
         public State State { get; set; }
 
         [MaxLength(20)]
         [Required]
         public string Zip { get; set; }
 
+        [MaxLength(10)]
         [Required]
         public string PhoneNumber { get; set; }
 
+        [Required]
         public ContactFrequency ContactFrequency { get; set; }
 
+        [Required]
         public ContactMethod ContactMethod { get; set; }
     }
 
