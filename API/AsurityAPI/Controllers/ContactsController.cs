@@ -44,9 +44,14 @@ namespace AsurityAPI.Controllers
             return contact;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutContact(int id, Contact contact)
+        [HttpPut]
+        public async Task<IActionResult> PutContact(Contact contact)
         {
+            if (!UpdateContactRelationalObjects(contact, out var message))
+            {
+                return BadRequest(message);
+            }
+
             _context.Entry(contact).State = EntityState.Modified;
 
             try
@@ -55,7 +60,7 @@ namespace AsurityAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ContactExists(id))
+                if (!ContactExists(contact.ContactId))
                 {
                     return NotFound();
                 }
@@ -71,6 +76,11 @@ namespace AsurityAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> PostContact(Contact contact)
         {
+            if (!UpdateContactRelationalObjects(contact, out var message))
+            {
+                return BadRequest(message);
+            }
+
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
@@ -95,6 +105,40 @@ namespace AsurityAPI.Controllers
         private bool ContactExists(int id)
         {
             return _context.Contacts.Any(e => e.ContactId == id);
+        }
+
+        private bool UpdateContactRelationalObjects(Contact contact, out string errorMessage)
+        {
+            var state = _context.States.FirstOrDefault(s => s.StateId == contact.State.StateId);
+            var frequency = _context.ContactFrequencies.FirstOrDefault(f =>
+                f.ContactFrequencyId == contact.ContactFrequency.ContactFrequencyId);
+            var method =
+                _context.ContactMethods.FirstOrDefault(m => m.ContactMethodId == contact.ContactMethod.ContactMethodId);
+
+            if (state == null)
+            {
+                errorMessage = "State does not exist";
+                return false;
+            }
+
+            if (frequency == null)
+            {
+                errorMessage = "Contact Frequency does not exist";
+                return false;
+            }
+
+            if (method == null)
+            {
+                errorMessage = "Contact Method does not exist";
+                return false;
+            }
+
+            contact.State = state;
+            contact.ContactFrequency = frequency;
+            contact.ContactMethod = method;
+
+            errorMessage = null;
+            return true;
         }
     }
 }
