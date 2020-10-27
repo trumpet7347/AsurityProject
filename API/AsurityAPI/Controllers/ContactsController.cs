@@ -24,7 +24,11 @@ namespace AsurityAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
         {
-            return await _context.Contacts.Include(c => c.State).ToListAsync();
+            return await _context.Contacts
+                .Include(c => c.State)
+                .Include(c => c.ContactFrequency)
+                .Include(c => c.ContactMethod)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]

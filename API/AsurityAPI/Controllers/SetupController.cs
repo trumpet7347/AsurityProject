@@ -78,7 +78,6 @@ namespace AsurityAPI.Controllers
                     new State(){StateId = 50, Name = "Wisconsin", Abbreviation = "WI"},
                     new State(){StateId = 51, Name = "Wyoming", Abbreviation = "WY"},
              });
-
             _context.SaveChanges();
 
             _context.ContactFrequencies.AddRange(new List<ContactFrequency>
@@ -106,11 +105,13 @@ namespace AsurityAPI.Controllers
                 City = "Knoxville",
                 State = _context.States.FirstOrDefault(s => s.Abbreviation == "TN"),
                 Zip = "37918",
-                PhoneNumber = "6015195402"
+                PhoneNumber = "6015195402",
+                ContactFrequency = _context.ContactFrequencies.FirstOrDefault(cf => cf.ContactFrequencyId == 1),
+                ContactMethod = _context.ContactMethods.FirstOrDefault(cm => cm.ContactMethodId == 3)
             });
 
             _context.SaveChanges();
-            return Ok();
+            return Ok("Test Data Setup");
         }
     }
 }
