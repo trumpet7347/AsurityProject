@@ -33,6 +33,7 @@ namespace AsurityAPI
                 options.UseInMemoryDatabase("InMemoryDatabase");
             });
 
+            services.AddCors();
             services.AddControllers();
 
         }
@@ -45,6 +46,7 @@ namespace AsurityAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseHttpsRedirection();
 
             app.UseRouting();
