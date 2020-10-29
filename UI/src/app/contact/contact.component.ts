@@ -23,5 +23,9 @@ export class ContactComponent implements OnInit {
     this.ContactService.getContacts().subscribe((data: Contact[]) => this.contacts = data);
   }
 
+  onRowClick(row): void {
+    let test = row;
+  }
+
 
 }
