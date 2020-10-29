@@ -34,7 +34,11 @@ namespace AsurityAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Contact>> GetContact(int id)
         {
-            var contact = await _context.Contacts.FindAsync(id);
+            var contact =  _context.Contacts
+                .Include(c => c.State)
+                .Include(c => c.ContactFrequency)
+                .Include(c => c.ContactMethod)
+                .FirstOrDefault(c => c.ContactId == id);
 
             if (contact == null)
             {
