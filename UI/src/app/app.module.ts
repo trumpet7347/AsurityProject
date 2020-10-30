@@ -9,19 +9,23 @@ import { ContactComponent } from './contact/contact.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { EditComponent } from './edit/edit.component'
+import { FormsModule } from '@angular/forms';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
-    EditComponent
+    EditComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

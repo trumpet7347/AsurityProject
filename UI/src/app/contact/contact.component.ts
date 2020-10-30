@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service'
 
@@ -9,13 +10,14 @@ import { ContactService } from '../contact.service'
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private ContactService: ContactService) { }
+  constructor(private ContactService: ContactService, private router: Router) { }
 
   columnsToDisplay = ['firstName','lastName','email','street','city','state','zip','phoneNumber','contactFrequency','contactMethod'];
 
   contacts: Contact[];
 
   ngOnInit(): void {
+    this.contacts = new Array<Contact>();
     this.getContacts()
   }
 
@@ -24,7 +26,7 @@ export class ContactComponent implements OnInit {
   }
 
   onRowClick(row): void {
-    let test = row;
+    this.router.navigate[`/edit/${row.contactId}`]
   }
 
 

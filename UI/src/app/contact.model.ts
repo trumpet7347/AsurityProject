@@ -1,8 +1,10 @@
 import { State } from './state.model'
 import { ContactFrequency } from './contact-frequency.model'
 import { ContactMethod } from './contact-method.model'
+import { Statement } from '@angular/compiler'
 
 export class Contact {
+
     contactId: number;
     firstName: string;
     lastName: string;
@@ -15,4 +17,9 @@ export class Contact {
     contactFrequency:ContactFrequency;
     contactMethod: ContactMethod;
 
+    constructor(){
+        this.state = new State;
+        this.contactFrequency = new ContactFrequency;
+        this.contactMethod = new ContactMethod;
+    }
 }

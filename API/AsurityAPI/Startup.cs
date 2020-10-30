@@ -34,6 +34,13 @@ namespace AsurityAPI
             });
 
             services.AddCors();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => 
+                    options.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+            });
             services.AddControllers();
 
         }
@@ -46,7 +53,8 @@ namespace AsurityAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors("AllowOrigin");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
