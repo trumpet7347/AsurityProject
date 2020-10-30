@@ -11,44 +11,48 @@ const httpOptions = {
   })
 };
 
+// UPDATE THIS TO THE API URL FROM THE POWERSHELL WINDOW
+const baseUrl = 'https://localhost:5001';
+
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class ContactService {
 
   constructor(private http: HttpClient) { }
 
   getContacts(){
-    return this.http.get('https://localhost:44359/api/contacts');
+    return this.http.get(baseUrl + '/api/contacts');
   }
 
   getContact(id: number){
-    return this.http.get(`https://localhost:44359/api/contacts/${id}`);
+    return this.http.get(baseUrl + `/api/contacts/${id}`);
   }
 
   getStates(){
-    return this.http.get('https://localhost:44359/api/states');
+    return this.http.get(baseUrl + '/api/states');
   }
 
   getContactFreq(){
-    return this.http.get('https://localhost:44359/api/ContactFrequencies');
+    return this.http.get(baseUrl + '/api/ContactFrequencies');
   }
 
   getContactMethod(){
-    return this.http.get('https://localhost:44359/api/ContactMethods');
+    return this.http.get(baseUrl + '/api/ContactMethods');
   }
 
   updateContact(data: Contact){
-    return this.http.put('https://localhost:44359/api/contacts', data);
+    return this.http.put(baseUrl + '/api/contacts', data);
   }
 
   deleteContact(id: number){
-    return this.http.delete(`https://localhost:44359/api/contacts/${id}`)
+    return this.http.delete(baseUrl + `/api/contacts/${id}`)
   }
 
   addContact(data: Contact){
-    return this.http.post(`https://localhost:44359/api/contacts`, data)
+    return this.http.post(baseUrl + `/api/contacts`, data)
   }
 }
 
